@@ -25,7 +25,7 @@ python py_server_c2.py --host <your_host> --port <your_port>
 python py_client.py --server-host <server_host> --server-port <server_port>
 ```
 
-### Interactio
+### Interaction
 
 Once the client is connected to the server, it waits for commands. Commands received from the server will be executed in the client's environment. The output of the executed commands is sent back to the server.
 
