@@ -1,5 +1,9 @@
 # Command and Control (C2) Server
 
+<p align="center">
+<img src="c2_icon.png" alt="Command and Control" width="200" height="200"/>
+</p>
+
 A basic Command and Control (C2) server implementation using Python's socket module.
 
 ## Overview
