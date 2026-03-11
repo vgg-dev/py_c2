@@ -39,7 +39,42 @@ flowchart LR
   srv -->|"prints result"| op
 ```
 
-## 🚀 Quickstart (lab only)\r\n\r\n### Prerequisites\r\n\r\n- Python 3.x\r\n- Optional shared token via `PY_C2_TOKEN`\r\n\r\n### Run the server\r\n\r\n```bash\r\n# Optional: set a shared token (recommended)\r\nexport PY_C2_TOKEN=change-me\r\n\r\npython py_server_c2.py --host 127.0.0.1 --port 4444 --token "$PY_C2_TOKEN"\r\n```\r\n\r\n### Run the client\r\n\r\nIn a second terminal:\r\n\r\n```bash\r\npython py_client.py --server-host 127.0.0.1 --server-port 4444 --token "$PY_C2_TOKEN"\r\n```\r\n\r\n### Interaction\r\n\r\nType client-safe commands in the server prompt:\r\n\r\n- `help`\r\n- `ping`\r\n- `time`\r\n- `sysinfo`\r\n- `echo <text>`\r\n- `exit`\r\n\r\n## 🧰 HTTPS banner tool
+## 🚀 Quickstart (lab only)
+
+### Prerequisites
+
+- Python 3.x
+- Optional shared token via `PY_C2_TOKEN`
+
+### Run the server
+
+```bash
+# Optional: set a shared token (recommended)
+export PY_C2_TOKEN=change-me
+
+python py_server_c2.py --host 127.0.0.1 --port 4444 --token "$PY_C2_TOKEN"
+```
+
+### Run the client
+
+In a second terminal:
+
+```bash
+python py_client.py --server-host 127.0.0.1 --server-port 4444 --token "$PY_C2_TOKEN"
+```
+
+### Interaction
+
+Type client-safe commands in the server prompt:
+
+- `help`
+- `ping`
+- `time`
+- `sysinfo`
+- `echo <text>`
+- `exit`
+
+## 🧰 HTTPS banner tool
 
 Fetch a simple HTTPS banner for a host/port:
 
@@ -61,5 +96,7 @@ If you extend this for legitimate internal tooling, consider adding mutual authe
 ## 📄 License
 
 See `LICENSE`.
+
+
 
 
