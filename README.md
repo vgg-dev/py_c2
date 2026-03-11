@@ -1,65 +1,88 @@
-# Command and Control (C2) Server
-
-<p align="center">
-<img src="c2_icon.png" alt="Command and Control" width="200" height="200"/>
+﻿<p align="center">
+  <img src="c2_icon.png" alt="py_c2" width="180" height="180" />
 </p>
 
-A basic Command and Control (C2) server implementation using Python's socket module.
+<h1 align="center">py_c2</h1>
+<p align="center">A tiny Python socket-based client/server command channel for <b>local lab / educational</b> use.</p>
 
-## Overview
+<p align="center">
+  <a href="https://github.com/vgg-dev/py_c2">
+    <img alt="repo" src="https://img.shields.io/badge/github-vgg--dev%2Fpy__c2-111827" />
+  </a>
+  <a href="LICENSE">
+    <img alt="license" src="https://img.shields.io/github/license/vgg-dev/py_c2" />
+  </a>
+  <img alt="python" src="https://img.shields.io/badge/python-3.x-blue" />
+  <a href="https://github.com/vgg-dev/py_c2/commits/main">
+    <img alt="last commit" src="https://img.shields.io/github/last-commit/vgg-dev/py_c2" />
+  </a>
+</p>
 
-This script sets up a simple C2 server that listens for incoming connections from clients. It accepts commands from the server operator and sends them to the connected clients, receiving their responses.
+> [!IMPORTANT]
+> **Authorized use only.** This repo demonstrates a basic remote command channel where the client executes commands received from the server and returns output.
+>
+> It is intentionally minimal and **not secure** (no authentication, no encryption, no hardening). Run only in a controlled environment (e.g., localhost, lab VM network).
 
-## Usage
+## ✨ What’s in this repo
+
+- `py_server_c2.py` — simple TCP server that accepts a client and sends operator-entered commands
+- `py_client.py` — simple TCP client that connects and executes received commands
+- `py_https_banner.py` — small helper that fetches an HTTPS banner via TLS + a basic HTTP request
+
+## 🧭 Architecture (high level)
+
+```mermaid
+flowchart LR
+  op["Operator\n(terminal)"] -->|"types command"| srv["py_server_c2.py\nTCP server"]
+  srv -->|"command"| cli["py_client.py\nTCP client"]
+  cli -->|"stdout/stderr"| srv
+  srv -->|"prints result"| op
+```
+
+## 🚀 Quickstart (lab only)
 
 ### Prerequisites
 
 - Python 3.x
 
-### Running the Server
-
-1. Clone the repository or download the script.
-2. Open a terminal or command prompt.
-3. Run the server script:
+### Run the server
 
 ```bash
-python py_server_c2.py --host <your_host> --port <your_port>
+python py_server_c2.py --host 127.0.0.1 --port 4444
 ```
+
+### Run the client
+
+In a second terminal:
+
 ```bash
-python py_client.py --server-host <server_host> --server-port <server_port>
+python py_client.py --server-host 127.0.0.1 --server-port 4444
 ```
 
 ### Interaction
 
-Once the client is connected to the server, it waits for commands. Commands received from the server will be executed in the client's environment. The output of the executed commands is sent back to the server.
+- Server: type a command and press Enter
+- Client: executes the command in its environment and sends output back
 
-# Additional Tools
+## 🧰 HTTPS banner tool
 
-## HTTPS Banner Retrieval
-
-This Python script retrieves the HTTPS banner of a specified host and port by establishing an SSL/TLS connection using the `ssl` and `socket` modules.
-
-## Description
-
-The script initiates an SSL/TLS connection to the specified host and port using the `ssl.create_default_context()` method and `socket.create_connection()` function. It sends an HTTP GET request to the server and retrieves the banner information.
-
-## Usage
-
-### Prerequisites
-
-- Python 3.x
-
-### Running the Script
-
-1. Clone the repository or download the script.
-2. Open a terminal or command prompt.
-3. Run the script with the target host and port:
+Fetch a simple HTTPS banner for a host/port:
 
 ```bash
 python py_https_banner.py example.com 443
 ```
 
+## 🔐 Security notes
 
+This project is a minimal demo and omits common safety/security controls, including:
 
-## Disclaimer
-This is a basic demonstration and might lack security and advanced features. Use it in controlled environments for educational purposes only.
+- Authentication and authorization
+- Transport encryption
+- Input validation / command restrictions
+- Auditing, logging, and tamper resistance
+
+If you extend this for legitimate internal tooling, consider adding mutual authentication (e.g., mTLS), strict allowlists, and limiting the command surface.
+
+## 📄 License
+
+See `LICENSE`.
